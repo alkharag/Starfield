@@ -1,7 +1,23 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class Starfield extends PApplet {
+
 //your code here
 Particle [] lots;
 
-void setup()
+public void setup()
 {
 	size(1000, 900);
 	lots = new Particle[3000];
@@ -12,7 +28,7 @@ void setup()
 	lots[499] = new OddballParticle();
 }
 
-void draw()
+public void draw()
 {
 	if(mousePressed==false)
 	{
@@ -26,7 +42,7 @@ void draw()
 		lots[i].wrap();
 	}
 }
-void mousePressed()
+public void mousePressed()
 {
 	if(mousePressed==true)
 	{
@@ -48,8 +64,8 @@ class NormalParticle implements Particle
 	{
 		xP = 500;
 		yP = 450;
-		vPchange= (Math.random()*5)+0.1;
-		vP = (Math.random()*20)+0.1;
+		vPchange= (Math.random()*5)+0.1f;
+		vP = (Math.random()*20)+0.1f;
 		angleP = Math.PI*Math.random()*3;
 		colorP1=(int)(Math.random()*255);
 		colorP2=(int)(Math.random()*255);
@@ -113,7 +129,7 @@ class OddballParticle implements Particle
 	}
 	public void wrap()
 	{
-		angleOP += 0.05;
+		angleOP += 0.05f;
 		
 		if(vOPchange <50)
 		{
@@ -129,3 +145,12 @@ class OddballParticle implements Particle
 }
 
 
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "Starfield" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
+}
