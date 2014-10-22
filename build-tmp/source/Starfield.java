@@ -26,6 +26,11 @@ public void setup()
 		lots[i] = new NormalParticle();	
 	}
 	lots[499] = new OddballParticle();
+
+	for(int i=500; i < 520; i++)
+	{
+		lots[i] = new JumboParticle();
+	}
 }
 
 public void draw()
@@ -110,10 +115,10 @@ class OddballParticle implements Particle
 	OddballParticle()
 	{
 		xOP = 500;
-		yOP = 450;
-		vOP = 10;//(Math.random()*5)+10;
+		yOP = 400;
+		vOP = 25;//(Math.random()*5)+10;
 		vOPchange = 1;
-		angleOP = Math.PI*Math.random()*3;
+		angleOP = 0;
 	}	
 	public void show()
 	{
@@ -124,24 +129,37 @@ class OddballParticle implements Particle
 	public void move()
 	{
 		xOP= xOP+Math.cos(angleOP)*vOP;
-		yOP= yOP+Math.cos(angleOP)*vOP;
+		yOP= yOP+Math.sin(angleOP)*vOP;
 		
 	}
 	public void wrap()
 	{
-		angleOP += 0.05f;
+		angleOP += 0.3f;
 		
 		if(vOPchange <50)
 		{
-			vOPchange++;
+			vOPchange+=0.5f;
 		}
-		if(vOPchange == 50)
-		{
-			vOPchange =0;
-		}
+		
 		
 	}
 
+}
+class JumboParticle extends NormalParticle
+{
+
+	int JumboSize;
+	JumboParticle ()
+	{
+		JumboSize = 60;
+	}
+
+	public void show()
+	{
+		noStroke();
+		fill(colorP1,colorP2,colorP3,100);
+		ellipse((float)xP, (float)yP, JumboSize, JumboSize);
+	}
 }
 
 
